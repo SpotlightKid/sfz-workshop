@@ -1,0 +1,16 @@
+<control>
+  default_path=Samples/
+  #define $EXT flac
+  #include "Data/controls.sfz"
+
+<group>
+  #include "Data/modulation.sfz"
+
+// C#3-C4
+<region>
+  sample=Tin Whistle.$EXT
+  lokey=60
+  pitch_keycenter=74
+  hikey=84
+  tune=0
+  volume=-6

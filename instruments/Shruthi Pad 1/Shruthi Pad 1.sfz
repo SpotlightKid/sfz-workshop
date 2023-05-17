@@ -1,0 +1,119 @@
+// Name     : Shruthi Pad 1
+// Author   : Christopher Arndt
+// Copyright:
+// Date     : 2015/07/24
+// Comment  :
+
+<control>
+  default_path=Samples/
+  #define $EXT flac
+  #define $INSTRUMENT Shruthi-Pad-1
+
+<group>
+    lokey=0 hikey=127
+    transpose=0
+    ampeg_hold=0.001
+    loop_mode=no_loop
+    ampeg_attack=0.001
+    amplfo_freq=8.176
+    fillfo_freq=8.176
+    pitchlfo_freq=8.176
+    fil_type=lpf_2p
+    cutoff=19914
+    volume=6
+
+<region>
+    sample=$INSTRUMENT C2.$EXT
+    lokey=12 hikey=39
+    pitch_keycenter=36
+    pan=0
+    ampeg_release=1.99885
+    ampeg_attack=0.0100036
+    ampeg_holdcc133=0 // sfz v2
+    offset=0
+    end=277793
+    ampeg_hold=0.001
+
+<region>
+    sample=$INSTRUMENT Gb2.$EXT
+    lokey=40 hikey=45
+    pitch_keycenter=42
+    pan=0
+    ampeg_release=1.99885
+    ampeg_attack=0.0100036
+    ampeg_holdcc133=0 // sfz v2
+    offset=0
+    end=278492
+    ampeg_hold=0.001
+
+<region>
+    sample=$INSTRUMENT C3.$EXT
+    lokey=46 hikey=51
+    pitch_keycenter=48
+    pan=0
+    ampeg_release=1.99885
+    ampeg_attack=0.0100036
+    ampeg_holdcc133=0 // sfz v2
+    offset=0
+    end=278635
+    ampeg_hold=0.001
+
+<region>
+    sample=$INSTRUMENT Gb3.$EXT
+    lokey=52 hikey=57
+    pitch_keycenter=54
+    pan=0
+    ampeg_release=1.99885
+    ampeg_attack=0.0100036
+    ampeg_holdcc133=0 // sfz v2
+    offset=0
+    end=278356
+    ampeg_hold=0.001
+
+<region>
+    sample=$INSTRUMENT C4.$EXT
+    lokey=58 hikey=63
+    pitch_keycenter=60
+    pan=0
+    ampeg_release=1.99885
+    ampeg_attack=0.0100036
+    ampeg_holdcc133=0 // sfz v2
+    offset=0
+    end=279040
+    ampeg_hold=0.001
+
+<region>
+    sample=$INSTRUMENT Gb4.$EXT
+    lokey=64 hikey=69
+    pitch_keycenter=66
+    pan=0
+    ampeg_release=1.99885
+    ampeg_attack=0.0100036
+    ampeg_holdcc133=0 // sfz v2
+    offset=0
+    end=278818
+    ampeg_hold=0.001
+
+<region>
+    sample=$INSTRUMENT C5.$EXT
+    lokey=70 hikey=75
+    pitch_keycenter=72
+    pan=0
+    ampeg_release=1.99885
+    ampeg_attack=0.0100036
+    ampeg_holdcc133=0 // sfz v2
+    offset=0
+    end=278320
+    ampeg_hold=0.001
+
+<region>
+    sample=$INSTRUMENT Gb5.$EXT
+    lokey=76 hikey=96
+    pitch_keycenter=78
+    pan=0
+    ampeg_release=1.99885
+    ampeg_attack=0.0100036
+    ampeg_holdcc133=0 // sfz v2
+    offset=0
+    end=278794
+    ampeg_hold=0.001

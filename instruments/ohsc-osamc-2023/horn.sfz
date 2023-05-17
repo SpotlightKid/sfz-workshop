@@ -1,0 +1,16 @@
+<control>
+  default_path=Samples/
+  #define $EXT flac
+  #include "Data/controls.sfz"
+
+<group>
+  #include "Data/modulation.sfz"
+
+// C#3-C4
+<region>
+  sample=Jagdhorn.$EXT
+  lokey=36
+  pitch_keycenter=58
+  hikey=84
+  tune=0
+  volume=-6

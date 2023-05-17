@@ -1,0 +1,44 @@
+<control>
+  default_path=Samples/
+  #define $EXT flac
+  #define $INSTRUMENT Ukulele        // <--- CHANGE THIS DEFINITION!
+  #include "Data/controls.sfz"
+
+<group>
+  #include "Data/modulation.sfz"
+
+// C3-C4
+<region>
+  lokey=55
+  pitch_keycenter=60
+  hikey=63
+  sample=$INSTRUMENT-C4.$EXT
+  tune=0
+  volume=-6
+
+// E4
+<region>
+  lokey=63
+  pitch_keycenter=64
+  hikey=65
+  sample=$INSTRUMENT-E4.$EXT
+  tune=0
+  volume=-6
+
+// G4
+<region>
+  sample=$INSTRUMENT-G4.$EXT
+  lokey=66
+  pitch_keycenter=67
+  hikey=68
+  tune=0
+  volume=-6
+
+// A4
+<region>
+  sample=$INSTRUMENT-A4.$EXT
+  lokey=69
+  pitch_keycenter=69
+  hikey=72
+  tune=0
+  volume=-6

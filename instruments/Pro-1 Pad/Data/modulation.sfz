@@ -1,0 +1,37 @@
+loop_mode=no_loop
+
+// Sample offset
+offset=0
+offset_cc$CC_OFFSET=6000
+
+// Pitch LFO (Vibrato)
+pitchlfo_freq=1.0                       // LFO freq in hertz
+pitchlfo_freqcc$CC_VIBRATO_FREQ=10.0    // Modulation depth range in hertz
+pitchlfo_depth=0                        // Pitch modulation depth in cents
+pitchlfo_depthcc$CC_VIBRATO_DEPTH=50    // Modulation depth range in cents
+
+// Amplitude LFO (Tremolo)
+amplfo_freq=1.0                         // LFO freq in hertz
+amplfo_freqcc$CC_TREMOLO_FREQ=10.0      // modulation depth in hertz
+amplfo_depth=0                          // Amplitude modulation depth in dB
+amplfo_depthcc$CC_TREMOLO_DEPTH=6       // modulation depth in dB
+
+// Amp Envelope
+amp_veltrack=0                          // -100..+100
+ampeg_attack=0.001                      // Envelope segment length in seconds
+ampeg_attackcc$CC_ATTACK=0.5
+ampeg_decay=0.1
+ampeg_decaycc$CC_DECAY=5.0
+ampeg_sustain=0
+ampeg_sustaincc$CC_SUSTAIN=100
+ampeg_release=0.1
+ampeg_releasecc$CC_RELEASE=5.0
+
+// Filter
+//fil_type=lpf_2p               // lpf_1p, hpf_1p, lpf_2p, hpf_2p, bpf_2p, brf_2p, bpf_1p, brf_1p,
+                                // apf_1p, lpf_2p_sv, hpf_2p_sv, bpf_2p_sv, brf_2p_sv, pkf_2p,
+                                // lpf_4p, hpf_4p, lpf_6p, hpf_6p, comb, pink, lsh, hsh, peq
+//cutoff=100                    // Cutoff freq in hertz
+//cutoff_cc$CC_CUTOFF=4800      // Modulation depth range in cents
+//resonance=0                   // Resonance value in dB
+//resonance_oncc$CC_RESO=9      // Modulation depth range in dB
