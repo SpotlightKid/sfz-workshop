@@ -1,0 +1,41 @@
+// SFZ Template
+//
+// * 1 sample per octave
+// * 1 velocity layer
+// * 1 round-robins samples per note
+
+<control>
+  default_path=Samples/
+  #define $EXT wav
+  #define $INSTRUMENT Example        // <--- CHANGE THIS DEFINITION!
+  #include "Data/controls.sfz"
+
+<group>
+  #include "Data/modulation.sfz"
+
+// C3-C4
+<region>
+  sample=$INSTRUMENT-G3.$EXT
+  lokey=48
+  pitch_keycenter=55
+  hikey=60
+  tune=0
+  volume=-6
+
+// C#3-C4
+<region>
+  sample=$INSTRUMENT-G4.$EXT
+  lokey=61
+  pitch_keycenter=67
+  hikey=72
+  tune=0
+  volume=-6
+
+// C#4-C5
+<region>
+  sample=$INSTRUMENT-G5.$EXT
+  lokey=73
+  pitch_keycenter=79
+  hikey=84
+  tune=0
+  volume=-6

@@ -1,0 +1,36 @@
+#define $CC_ATTACK 23
+#define $CC_DECAY 24
+#define $CC_SUSTAIN 25
+#define $CC_RELEASE 26
+#define $CC_CUTOFF 6
+#define $CC_RESO 13
+#define $CC_VIBRATO_FREQ 22
+#define $CC_VIBRATO_DEPTH 1
+#define $CC_TREMOLO_FREQ 27
+#define $CC_TREMOLO_DEPTH 28
+
+label_cc7=Volume
+label_cc10=Pan
+label_cc11=Expression
+label_cc$CC_ATTACK=Attack
+label_cc$CC_DECAY=Decay
+label_cc$CC_SUSTAIN=Sustain
+label_cc$CC_RELEASE=Release
+label_cc$CC_CUTOFF=Filter Cutoff
+label_cc$CC_RESO=Resonance
+label_cc$CC_VIBRATO_FREQ=Vibrato Freq
+label_cc$CC_VIBRATO_DEPTH=Vibrato Depth
+label_cc$CC_TREMOLO_FREQ=Tremolo Freq
+label_cc$CC_TREMOLO_DEPTH=Tremolo Depth
+
+set_cc$CC_ATTACK=0
+set_cc$CC_DECAY=0
+set_cc$CC_SUSTAIN=127
+set_cc$CC_RELEASE=0
+set_cc$CC_CUTOFF=0
+set_cc$CC_RESO=0
+set_cc$CC_VIBRATO_FREQ=64
+set_cc$CC_VIBRATO_DEPTH=0
+set_cc$CC_TREMOLO_SPEED=64
+set_cc$CC_TREMOLO_DEPTH=0
+

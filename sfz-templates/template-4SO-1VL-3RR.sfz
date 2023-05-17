@@ -1,0 +1,413 @@
+// SFZ Template
+//
+// * 3 samples per octave
+// * 1 velocity layer
+// * 3 round-robins samples per note
+
+<control>
+  default_path=Samples/
+  #define $EXT flac
+  #define $INSTRUMENT Example        // <--- CHANGE THIS DEFINITION!
+  #include "Data/controls.sfz"
+
+<global>
+  #include "Data/modulation.sfz"
+
+<group>
+  lokey=24
+  pitch_keycenter=36
+  hikey=37
+  seq_length=3
+
+<region>
+  seq_position=1
+  sample=$INSTRUMENT C2 1.$EXT
+
+<region>
+  seq_position=2
+  sample=$INSTRUMENT C2 2.$EXT
+
+<region>
+  seq_position=3
+  sample=$INSTRUMENT C2 3.$EXT
+
+
+
+<group>
+  lokey=38
+  pitch_keycenter=39
+  hikey=40
+  seq_length=3
+
+<region>
+  seq_position=1
+  sample=$INSTRUMENT D#2 1.$EXT
+
+<region>
+  seq_position=2
+  sample=$INSTRUMENT D#2 2.$EXT
+
+<region>
+  seq_position=3
+  sample=$INSTRUMENT D#2 3.$EXT
+
+
+<group>
+  lokey=41
+  pitch_keycenter=42
+  hikey=43
+  seq_length=3
+
+<region>
+  seq_position=1
+  sample=$INSTRUMENT F#2 1.$EXT
+
+<region>
+  seq_position=2
+  sample=$INSTRUMENT F#2 2.$EXT
+
+<region>
+  seq_position=3
+  sample=$INSTRUMENT F#2 3.$EXT
+
+
+<group>
+  lokey=44
+  pitch_keycenter=45
+  hikey=46
+  seq_length=3
+
+<region>
+  seq_position=1
+  sample=$INSTRUMENT A2 1.$EXT
+
+<region>
+  seq_position=2
+  sample=$INSTRUMENT A2 2.$EXT
+
+<region>
+  seq_position=3
+  sample=$INSTRUMENT A2 3.$EXT
+
+
+<group>
+  lokey=47
+  pitch_keycenter=48
+  hikey=49
+  seq_length=3
+
+<region>
+  seq_position=1
+  sample=$INSTRUMENT C3 1.$EXT
+
+<region>
+  seq_position=2
+  sample=$INSTRUMENT C3 2.$EXT
+
+<region>
+  seq_position=3
+  sample=$INSTRUMENT C3 3.$EXT
+
+
+<group>
+  lokey=50
+  pitch_keycenter=51
+  hikey=52
+  seq_length=3
+
+<region>
+  seq_position=1
+  sample=$INSTRUMENT D#3 1.$EXT
+
+<region>
+  seq_position=2
+  sample=$INSTRUMENT D#3 2.$EXT
+
+<region>
+  seq_position=3
+  sample=$INSTRUMENT D#3 3.$EXT
+
+
+<group>
+  lokey=53
+  pitch_keycenter=54
+  hikey=55
+  seq_length=3
+
+<region>
+  seq_position=1
+  sample=$INSTRUMENT F#3 1.$EXT
+
+<region>
+  seq_position=2
+  sample=$INSTRUMENT F#3 2.$EXT
+
+<region>
+  seq_position=3
+  sample=$INSTRUMENT F#3 3.$EXT
+
+
+<group>
+  lokey=56
+  pitch_keycenter=57
+  hikey=58
+  seq_length=3
+
+<region>
+  seq_position=1
+  sample=$INSTRUMENT A3 1.$EXT
+
+<region>
+  seq_position=2
+  sample=$INSTRUMENT A3 2.$EXT
+
+<region>
+  seq_position=3
+  sample=$INSTRUMENT A3 3.$EXT
+
+
+<group>
+  lokey=59
+  pitch_keycenter=60
+  hikey=61
+  seq_length=3
+
+<region>
+  seq_position=1
+  sample=$INSTRUMENT C4 1.$EXT
+
+<region>
+  seq_position=2
+  sample=$INSTRUMENT C4 2.$EXT
+
+<region>
+  seq_position=3
+  sample=$INSTRUMENT C4 3.$EXT
+
+
+<group>
+  lokey=62
+  pitch_keycenter=63
+  hikey=64
+  seq_length=3
+
+<region>
+  seq_position=1
+  sample=$INSTRUMENT D#4 1.$EXT
+
+<region>
+  seq_position=2
+  sample=$INSTRUMENT D#4 2.$EXT
+
+<region>
+  seq_position=3
+  sample=$INSTRUMENT D#4 3.$EXT
+
+
+<group>
+  lokey=65
+  pitch_keycenter=66
+  hikey=67
+  seq_length=3
+
+<region>
+  seq_position=1
+  sample=$INSTRUMENT F#4 1.$EXT
+
+<region>
+  seq_position=2
+  sample=$INSTRUMENT F#4 2.$EXT
+
+<region>
+  seq_position=3
+  sample=$INSTRUMENT F#4 3.$EXT
+
+
+<group>
+  lokey=68
+  pitch_keycenter=69
+  hikey=70
+  seq_length=3
+
+<region>
+  seq_position=1
+  sample=$INSTRUMENT A4 1.$EXT
+
+<region>
+  seq_position=2
+  sample=$INSTRUMENT A4 2.$EXT
+
+<region>
+  seq_position=3
+  sample=$INSTRUMENT A4 3.$EXT
+
+
+<group>
+  lokey=71
+  pitch_keycenter=72
+  hikey=73
+  seq_length=3
+
+<region>
+  seq_position=1
+  sample=$INSTRUMENT C5 1.$EXT
+
+<region>
+  seq_position=2
+  sample=$INSTRUMENT C5 2.$EXT
+
+<region>
+  seq_position=3
+  sample=$INSTRUMENT C5 3.$EXT
+
+
+<group>
+  lokey=74
+  pitch_keycenter=75
+  hikey=76
+  seq_length=3
+
+<region>
+  seq_position=1
+  sample=$INSTRUMENT D#5 1.$EXT
+
+<region>
+  seq_position=2
+  sample=$INSTRUMENT D#5 2.$EXT
+
+<region>
+  seq_position=3
+  sample=$INSTRUMENT D#5 3.$EXT
+
+
+<group>
+  lokey=77
+  pitch_keycenter=78
+  hikey=79
+  seq_length=3
+
+<region>
+  seq_position=1
+  sample=$INSTRUMENT F#5 1.$EXT
+
+<region>
+  seq_position=2
+  sample=$INSTRUMENT F#5 2.$EXT
+
+<region>
+  seq_position=3
+  sample=$INSTRUMENT F#5 3.$EXT
+
+
+<group>
+  lokey=80
+  pitch_keycenter=81
+  hikey=82
+  seq_length=3
+
+<region>
+  seq_position=1
+  sample=$INSTRUMENT A5 1.$EXT
+
+<region>
+  seq_position=2
+  sample=$INSTRUMENT A5 2.$EXT
+
+<region>
+  seq_position=3
+  sample=$INSTRUMENT A5 3.$EXT
+
+
+<group>
+  lokey=83
+  pitch_keycenter=84
+  hikey=85
+  seq_length=3
+
+<region>
+  seq_position=1
+  sample=$INSTRUMENT C6 1.$EXT
+
+<region>
+  seq_position=2
+  sample=$INSTRUMENT C6 2.$EXT
+
+<region>
+  seq_position=3
+  sample=$INSTRUMENT C6 3.$EXT
+
+
+<group>
+  lokey=86
+  pitch_keycenter=87
+  hikey=88
+  seq_length=3
+
+<region>
+  seq_position=1
+  sample=$INSTRUMENT D#6 1.$EXT
+
+<region>
+  seq_position=2
+  sample=$INSTRUMENT D#6 2.$EXT
+
+<region>
+  seq_position=3
+  sample=$INSTRUMENT D#6 3.$EXT
+
+
+<group>
+  lokey=89
+  pitch_keycenter=90
+  hikey=91
+  seq_length=3
+
+<region>
+  seq_position=1
+  sample=$INSTRUMENT F#6 1.$EXT
+
+<region>
+  seq_position=2
+  sample=$INSTRUMENT F#6 2.$EXT
+
+<region>
+  seq_position=3
+  sample=$INSTRUMENT F#6 3.$EXT
+
+
+<group>
+  lokey=92
+  pitch_keycenter=93
+  hikey=94
+  seq_length=3
+
+<region>
+  seq_position=1
+  sample=$INSTRUMENT A6 1.$EXT
+
+<region>
+  seq_position=2
+  sample=$INSTRUMENT A6 2.$EXT
+
+<region>
+  seq_position=3
+  sample=$INSTRUMENT A6 3.$EXT
+
+
+<group>
+  lokey=95
+  pitch_keycenter=96
+  hikey=108
+  seq_length=3
+
+<region>
+  seq_position=1
+  sample=$INSTRUMENT C7 1.$EXT
+
+<region>
+  seq_position=2
+  sample=$INSTRUMENT C7 2.$EXT
+
+<region>
+  seq_position=3
+  sample=$INSTRUMENT C7 3.$EXT
