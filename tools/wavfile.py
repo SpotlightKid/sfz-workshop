@@ -1,38 +1,35 @@
 # -*- coding: utf-8 -*-
 
-__all_ = [
-    'Error',
-    'FmtChunk',
-    'ParsingError',
-    'SmplChunk',
-    'UnsupportedCompressionError',
-    'WavChunk',
-    'WavFile'
-]
-
 import logging
 import struct
 
 from chunk import Chunk
 
 
-if not isinstance('', bytes):
-    basestring = str
-
+__all__ = (
+    "Error",
+    "FmtChunk",
+    "ParseError",
+    "SmplChunk",
+    "UnsupportedCompressionError",
+    "UnsupportedFileTypeError",
+    "WavChunk",
+    "WavFile",
+)
 
 # module globals
 log = logging.getLogger(__name__)
 
 KNOWN_CHUNKS = [
-    b'cue ',
-    b'data',
-    b'fact',
-    b'fmt ',
-    b'inst',
-    b'list',
-    b'plst',
-    b'smpl',
-    b'wavl',
+    b"cue ",
+    b"data",
+    b"fact",
+    b"fmt ",
+    b"inst",
+    b"list",
+    b"plst",
+    b"smpl",
+    b"wavl",
 ]
 # sub-chunks of 'list'
 #    'ltxt',
@@ -40,17 +37,17 @@ KNOWN_CHUNKS = [
 #    'labl',
 
 FORMAT_TAGS = {
-    0: 'Unknown',
-    1: 'PCM/uncompressed',
-    2: 'Microsoft ADPCM',
-    6: 'ITU G.711 a-law',
-    7: 'ITU G.711 u-law',
-    17: 'IMA ADPCM',
-    20: 'ITU G.723 ADPCM',
-    49: 'GSM 6.10',
-    64: 'ITU G.721 ADPCM',
-    80: 'MPEG',
-    0xFFFF: 'Experimental',
+    0: "Unknown",
+    1: "PCM/uncompressed",
+    2: "Microsoft ADPCM",
+    6: "ITU G.711 a-law",
+    7: "ITU G.711 u-law",
+    17: "IMA ADPCM",
+    20: "ITU G.723 ADPCM",
+    49: "GSM 6.10",
+    64: "ITU G.721 ADPCM",
+    80: "MPEG",
+    0xFFFF: "Experimental",
 }
 
 LOOP_TYPE_FORWARD = 0
@@ -62,18 +59,25 @@ WAVE_FORMAT_PCM = 0x0001
 # exceptions
 class Error(Exception):
     """General error."""
+
     pass
 
 
 class ParseError(Error):
+    """Raised when invalid data is encountered while parsing a WAV file."""
+
     pass
 
 
-class UnsupportedFileTypeError(Error):
+class UnsupportedFileTypeError(ParseError):
+    """Raised when not a RIFF file or first chunk is not a 'WAVE' chunk."""
+
     pass
 
 
 class UnsupportedCompressionError(Error):
+    """Raise when sample compression format is uknown or unsupported."""
+
     pass
 
 
@@ -105,14 +109,15 @@ class WavChunk(Chunk):
     Specialized sub-classes for specific chunk types may add more attributes
     for parsed chunk data.
 
-    Getting the string value of an instance (e.g. via 'str()' or 'print'),
-    yields the binary chunk data including tag and size fields and appopriate
-    data padding.
+    Getting the bytes value of an instance (e.g. via 'bytes()') yields the
+    binary chunk data including tag and size fields and appopriate data
+    padding.
 
     """
-    fourcc = b''
+
+    fourcc = b""
     _fieldnames = ()
-    _pack_format = ''
+    _pack_format = ""
 
     def __init__(self, file, name=None):
         self.closed = False
@@ -122,13 +127,14 @@ class WavChunk(Chunk):
 
         if name is None:
             self.chunkname = file.read(4)
+
             if len(self.chunkname) < 4:
                 raise EOFError
         else:
             self.name = name
 
         try:
-            self.chunksize = struct.unpack('<L', file.read(4))[0]
+            self.chunksize = struct.unpack("<L", file.read(4))[0]
         except struct.error:
             raise EOFError
 
@@ -143,14 +149,20 @@ class WavChunk(Chunk):
             self.seekable = True
             self._data = None
 
-    def _get_name(self):
+    @property
+    def name(self):
+        """Four-character chunk tag."""
         return self.chunkname
-    def _set_name(self, name):
-        if len(name) > 4:
-            raise ValueError("Chunk tag name length must be 4 characters.")
 
-        self.chunkname = name + b' ' * max(0, 4 - len(name))
-    name = property(_get_name, _set_name, None, "Four-character chunk tag.")
+    @name.setter
+    def name(self, value):
+        if len(value) > 4:
+            raise ValueError("Chunk tag name length must <= 4 characters.")
+
+        if isinstance(value, str):
+            value = value.encode("ascii")
+
+        self.chunkname = value + b" " * max(0, 4 - len(value))
 
     @property
     def size(self):
@@ -169,16 +181,17 @@ class WavChunk(Chunk):
         return self._data
 
     def __repr__(self):
-        return (" ".join(["%02X" % c if isinstance(c, int) else ord(c)
-            for c in self.data[:100]]) +
-            (" [...]" if len(self.data) > 100 else ""))
+        return " ".join(
+            ["%02X" % c if isinstance(c, int) else ord(c) for c in self.data[:100]]
+        ) + (" [...]" if len(self.data) > 100 else "")
 
-    def __str__(self):
-        fmt = '<4sL%is' % len(self.data)
-        packed_size = struct.pack('<L', len(self.data))
-        log.debug("Data size: %i (%r)", len(self.data), packed_size)
+    def __bytes__(self):
+        fmt = "<4sL%is" % len(self.data)
+        packed_size = struct.pack("<L", len(self.data))
+        log.debug("Data size: %i (%r)", len(seslf.data), packed_size)
         return struct.pack(fmt, self.name, len(self.data), self.data) + (
-            '\0' if len(self.data) % 2 else '')
+            b"\0" if len(self.data) % 2 else b""
+        )
 
     def __getattr__(self, name):
         log.debug("%s.__getattr__(%r) called.", self.__class__.__name__, name)
@@ -194,46 +207,44 @@ class WavChunk(Chunk):
     def _parse(self):
         log.debug("%s._parse() called.", self.__class__.__name__)
         try:
-            self.__dict__.update(_unpack_to_dict(self._pack_format, self.data,
-                0, *self._fieldnames))
+            self.__dict__.update(
+                _unpack_to_dict(self._pack_format, self.data, 0, *self._fieldnames)
+            )
         except struct.error:
             raise ParseError("Invalid data in '%s' chunk." % self.fourcc)
 
 
 class FmtChunk(WavChunk):
+    """Represents a 'fmt ' chunk with info on sample format, channels etc."""
 
-    fourcc = 'fmt '
-    _pack_format = '<hhllh'
-    _fieldnames = (
-        'format_tag',
-        'channels',
-        'samples_per_sec',
-        'avg_bytes_per_sec',
-        'block_align')
+    fourcc = "fmt "
+    _pack_format = "<hhllh"
+    _fieldnames = ("format_tag", "channels", "samples_per_sec", "avg_bytes_per_sec", "block_align")
 
     def _parse(self):
-        WavChunk._parse(self)
+        super()._parse()
 
         if self.format_tag == WAVE_FORMAT_PCM:
-            self.bits_per_sample = struct.unpack('<h', self.data[14:16])[0]
+            self.bits_per_sample = struct.unpack("<h", self.data[14:16])[0]
             self.compressed = False
         else:
             self.compressed = True
 
             if self.format_tag not in FORMAT_TAGS:
-                log.warn('Unknown format tag: %r', self.format_tag)
+                log.warn("Unknown format tag: %r", self.format_tag)
 
     @property
     def comp_name(self):
-        return FORMAT_TAGS.get(self.format_tag, '<unsupported>')
+        return FORMAT_TAGS.get(self.format_tag, "<unsupported>")
 
     @property
     def sample_width(self):
         if self.format_tag == WAVE_FORMAT_PCM:
             return (self.bits_per_sample + 7) // 8
         else:
-            raise UnsupportedCompressionError("Can't determine sample width "
-                "for %s data compression format.", self.comp_name)
+            raise UnsupportedCompressionError(
+                "Can't determine sample width for %s data compression format." % self.comp_name
+            )
 
     @property
     def frame_size(self):
@@ -243,35 +254,35 @@ class FmtChunk(WavChunk):
 class SmplChunk(WavChunk):
     """Represents a 'smpl' chunk with information for samplers."""
 
-    fourcc = 'smpl'
-    _pack_format = '<9l'
-    _loop_pack_format = '<6l'
+    fourcc = "smpl"
+    _pack_format = "<9l"
+    _loop_pack_format = "<6l"
     _fieldnames = (
-        'manufacturer',
-        'product',
-        'sample_period',
-        'midi_unity_note',
-        'midi_pitch_fraction',
-        'smpte_format',
-        'smpte_offset',
-        'sample_loops',
-        'sampler_data')
-    _loop_fieldnames = (
-        'cue_point_id',
-        'type',
-        'start',
-        'end',
-        'fraction',
-        'play_count')
+        "manufacturer",
+        "product",
+        "sample_period",
+        "midi_unity_note",
+        "midi_pitch_fraction",
+        "smpte_format",
+        "smpte_offset",
+        "sample_loops",
+        "sampler_data",
+    )
+    _loop_fieldnames = ("cue_point_id", "type", "start", "end", "fraction", "play_count")
 
     def _parse(self):
-        WavChunk._parse(self)
+        super()._parse()
         self.loops = []
 
         for i in range(self.sample_loops):
             self.loops.append(
-                _unpack_to_dict(self._loop_pack_format, self.data,
-                struct.calcsize(self._pack_format), *self._loop_fieldnames))
+                _unpack_to_dict(
+                    self._loop_pack_format,
+                    self.data,
+                    struct.calcsize(self._pack_format),
+                    *self._loop_fieldnames
+                )
+            )
 
 
 class ListChunk(WavChunk):
@@ -283,44 +294,51 @@ class ListChunk(WavChunk):
     (as a byte string) as the second.
 
     """
-    _fieldnames = ('type_id',)
-    _pack_format = '<4s'
+
+    _fieldnames = ("type_id",)
+    _pack_format = "<4s"
 
     def _parse(self):
-        WavChunk._parse(self)
+        super()._parse()
         pos = 4
         self.subchunks = []
 
         while pos < len(self.data):
-            tag = self.data[pos:pos+4]
-            size = struct.unpack_from('<l', self.data, pos + 4)[0]
-            self.subchunks.append((tag, self.data[pos+8:pos+8+size]))
+            tag = self.data[pos : pos + 4]
+            size = struct.unpack_from("<l", self.data, pos + 4)[0]
+            self.subchunks.append((tag, self.data[pos + 8 : pos + 8 + size]))
             pos += 8 + size + (1 if size % 2 else 0)
 
 
 class CueChunk(WavChunk):
     """Represents a 'cue ' chunk with the list of cue points."""
 
-    fourcc = 'cue '
-    _pack_format = '<l'
-    _cue_pack_format = '<2l4s3l'
-    _fieldnames = ('num_cue_points')
+    fourcc = "cue "
+    _pack_format = "<l"
+    _cue_pack_format = "<2l4s3l"
+    _fieldnames = "num_cue_points"
     _loop_fieldnames = (
-        'id',
-        'position',
-        'data_chunk_id',
-        'chunk_start',
-        'block_start',
-        'sample_offset')
+        "id",
+        "position",
+        "data_chunk_id",
+        "chunk_start",
+        "block_start",
+        "sample_offset",
+    )
 
     def _parse(self):
-        WavChunk._parse(self)
+        super()._parse()
         self.cue_points = []
 
         for i in range(self.num_cue_points):
             self.cue_points.append(
-                _unpack_to_dict(self._cue_pack_format, self.data,
-                struct.calcsize(self._pack_format), *self._cue_fieldnames))
+                _unpack_to_dict(
+                    self._cue_pack_format,
+                    self.data,
+                    struct.calcsize(self._pack_format),
+                    *self._cue_fieldnames
+                )
+            )
 
 
 class WavFile(object):
@@ -331,10 +349,11 @@ class WavFile(object):
 
         if isinstance(wavfile, str):
             self.filename = wavfile
-            self.file = open(self.filename, 'rb')
+            self.file = open(self.filename, "rb")
             self._i_opened_the_file = True
         else:
             self.file = wavfile
+
             try:
                 self.filename = wavfile.name
             except AttributeError:
@@ -342,20 +361,20 @@ class WavFile(object):
 
         try:
             self._riff = Chunk(self.file, align=True, bigendian=False)
-
             riff_name = self._riff.getname()
-            if riff_name != b'RIFF':
-                raise ValueError("First chunk name != 'RIFF' (value '%s')" %
-                    riff_name)
         except (EOFError, ValueError):
-            raise ParseError("%s: Invalid/missing RIFF tag or chunk size." %
-                self.filename)
+            raise ParseError("%s: Invalid/missing RIFF tag or chunk size." % self.filename)
 
-        if self._riff.read(4) != b'WAVE':
-            raise Error("%s: not a WAVE file" % self.filename)
+        if riff_name != b"RIFF":
+            raise UnsupportedFileTypeError(
+                "%s: First chunk name != 'RIFF' (value: %r)" % (self.filename, riff_name)
+            )
+
+        if self._riff.read(4) != b"WAVE":
+            raise UnsupportedFileTypeError("%s: not a WAVE file" % self.filename)
 
         # dict to store chunk by chunk name (four-cc tag)
-        self.chunks = dict()
+        self.chunks = {}
         # we keep an extra list of chunks to maintain chunk position
         self._chunklist = []
 
@@ -365,13 +384,14 @@ class WavFile(object):
             except EOFError:
                 break
 
-            if chunk.name == b'data' and b'fmt ' not in self.chunks:
+            if chunk.name == b"data" and b"fmt " not in self.chunks:
                 log.warn("Encountered 'data' chunk before 'fmt ' chunk.")
 
             if chunk.name in KNOWN_CHUNKS:
                 if chunk.name in self.chunks:
-                    log.warn("Ignoring extra '%s' chunk at %i bytes."
-                        % (chunk.name, self._riff.tell()))
+                    log.warn(
+                        "Ignoring extra '%s' chunk at %i bytes." % (chunk.name, self._riff.tell())
+                    )
                 else:
                     self.chunks[chunk.name] = chunk
             else:
@@ -380,15 +400,12 @@ class WavFile(object):
             self._chunklist.append(chunk)
             chunk.skip()
 
-        if b'fmt ' not in self.chunks or b'data' not in self.chunks:
+        if b"fmt " not in self.chunks or b"data" not in self.chunks:
             raise ParseError("'fmt ' chunk and/or 'data' chunk missing.")
 
     def close(self):
         if self._i_opened_the_file:
-            try:
-                self.file.close()
-            except:
-                pass
+            self.file.close()
 
     __del__ = close
 
@@ -401,13 +418,15 @@ class WavFile(object):
     def __repr__(self):
         s = []
         for chunk in self:
-            s.append("Chunk '%s': size %i (%r)\n" % (
-                chunk.name.decode('ascii'), chunk.size, chunk))
+            s.append(
+                "Chunk '%s': size %i (%r)\n" % (chunk.name.decode("ascii"), chunk.size, chunk)
+            )
+
         return "".join(s)
 
     def __str__(self):
         data = b"".join(str(chunk) for chunk in self)
-        packed_size = struct.pack('<l', len(data) + 4)
+        packed_size = struct.pack("<l", len(data) + 4)
         log.debug("Data size: %i (%r)", len(data), packed_size)
         return b"RIFF" + packed_size + b"WAVE" + data
 
@@ -418,14 +437,16 @@ class WavFile(object):
         for the 'fmt ' chunk, which is always returned first.
 
         """
-        yield self.chunks[b'fmt ']
-        for chunk in self.chunks.get(b'LIST', []):
-            if chunk.type_id == b'INFO':
+        yield self.chunks[b"fmt "]
+
+        for chunk in self.chunks.get(b"LIST", []):
+            if chunk.type_id == b"INFO":
                 yield chunk
+
         for chunk in self._chunklist:
-            if chunk.name == b'fmt ':
+            if chunk.name == b"fmt ":
                 continue
-            if chunk.name == b'LIST' and chunk.type_id == b'INFO':
+            elif chunk.name == b"LIST" and chunk.type_id == b"INFO":
                 continue
 
             yield chunk
@@ -433,12 +454,13 @@ class WavFile(object):
     def has_chunk(self, chunk_id):
         if isinstance(chunk_id, str):
             chunk_id = chunk_id.encode()
+
         return chunk_id in self.chunks
 
     @property
     def fmt(self):
         try:
-            return self.chunks[b'fmt ']
+            return self.chunks[b"fmt "]
         except KeyError:
             log.warning("'fmt ' chunk not found.")
             return None
@@ -446,7 +468,7 @@ class WavFile(object):
     @property
     def smpl(self):
         try:
-            return self.chunks[b'smpl']
+            return self.chunks[b"smpl"]
         except KeyError:
             log.warning("'smpl' chunk not found.")
             return None
@@ -454,50 +476,52 @@ class WavFile(object):
     @property
     def loops(self):
         try:
-            return self.chunks[b'smpl'].loops
+            return self.chunks[b"smpl"].loops
         except KeyError:
+            log.warning("'smpl' chunk not found.")
             return []
 
     @property
     def cue_points(self):
         try:
-            return self.chunks[b'cue '].loops
+            return self.chunks[b"cue "].loops
         except KeyError:
+            log.warning("'cue ' chunk not found.")
             return []
 
     @property
     def info(self):
         try:
-            for chunk in self.chunks.get(b'LIST', []):
-                if chunk.type_id == b'INFO':
-                    return dict((key, val.rstrip('\0'))
-                        for key, val in chunk.subchunks)
+            for chunk in self.chunks.get(b"LIST", []):
+                if chunk.type_id == b"INFO":
+                    return dict((key, val.rstrip("\0")) for key, val in chunk.subchunks)
         except KeyError:
             pass
-        return dict()
+
+        return {}
 
     def raw_frames(self):
-        data = self.chunks[b'data'].data
+        data = self.chunks[b"data"].data
         size = len(data)
         fs = self.fmt.frame_size
         pos = 0
 
         while pos <= size - fs:
-            yield data[pos:pos+fs]
+            yield data[pos : pos + fs]
             pos += fs
 
 
 _chunk_registry = {
-    b'cue ': CueChunk,
-    b'fmt ': FmtChunk,
-    b'smpl': SmplChunk,
-    b'list': ListChunk,
-    b'LIST': ListChunk,
-    None: WavChunk
+    b"cue ": CueChunk,
+    b"fmt ": FmtChunk,
+    b"smpl": SmplChunk,
+    b"list": ListChunk,
+    b"LIST": ListChunk,
+    None: WavChunk,
 }
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import sys
 
     logging.basicConfig(level=logging.DEBUG)
@@ -507,11 +531,11 @@ if __name__ == '__main__':
             wav = WavFile(sys.argv[1])
         else:
             wav = WavFile(sys.stdin)
-    except Exception as exc:
+    except:  # noqa:E722
         # XXX: for debugging, remove in release code
         import traceback
+
         traceback.print_exc()
         sys.exit(1)
 
-    sys.stdout.write(repr(wav))
-    print()
+    print(repr(wav))
