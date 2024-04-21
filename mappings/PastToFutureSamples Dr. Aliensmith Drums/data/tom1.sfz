@@ -1,0 +1,57 @@
+// ===========================================
+// Low Rack Tom
+<master>
+  master_label=low rack tom
+  master_volume=-6
+  locc$VOLUME_TOM1=1
+  amplitude_oncc$VOLUME_TOM1=200
+  pan_oncc$PAN_TOM1=100
+  pan_curvecc$PAN_TOM1=1
+  tune_oncc$TUNE_TOM1=1200
+  tune_curvecc$TUNE_TOM1=1
+  group=3
+  note_polyphony=1
+  off_time=1.5
+  output=$OUTPUT_TOM1
+
+<group>
+  group_label=low rack tom
+  key=47
+  seq_length=2
+
+<region>
+  region_label=low rack tom RR1
+  sample=tom1_1.$EXT
+  seq_position=1
+  lorand=0.000
+  hirand=0.333
+<region>
+  region_label=low rack tom RR2
+  sample=tom1_2.$EXT
+  seq_position=1
+  lorand=0.333
+  hirand=0.667
+<region>
+  region_label=low rack tom RR3
+  sample=tom1_3.$EXT
+  seq_position=1
+  lorand=0.667
+  hirand=1.000
+<region>
+  region_label=low rack tom RR4
+  sample=tom1_4.$EXT
+  seq_position=2
+  lorand=0.000
+  hirand=0.333
+<region>
+  region_label=low rack tom RR5
+  sample=tom1_5.$EXT
+  seq_position=2
+  lorand=0.333
+  hirand=0.667
+<region>
+  region_label=low rack tom RR6
+  sample=tom1_6.$EXT
+  seq_position=2
+  lorand=0.667
+  hirand=1.000

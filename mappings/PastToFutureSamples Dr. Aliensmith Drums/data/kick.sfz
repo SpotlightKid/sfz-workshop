@@ -1,0 +1,100 @@
+// ===========================================
+// Kick
+
+<master>
+  master_label=kick
+  locc$VOLUME_KICK=1
+  amplitude_oncc$VOLUME_KICK=200
+  pan_oncc$PAN_KICK=100
+  pan_curvecc$PAN_KICK=1
+  tune_oncc$TUNE_KICK=1200
+  tune_curvecc$TUNE_KICK=1
+  group=1
+  note_polyphony=1
+  off_time=1.5
+  output=$OUTPUT_KICK
+
+<group>
+  group_label=kick soft
+  hivel=63
+  key=36
+  seq_length=2
+
+<region>
+  region_label=kick soft RR1
+  sample=kick_s_1.$EXT
+  seq_position=1
+  lorand=0.000
+  hirand=0.333
+<region>
+  region_label=kick soft RR2
+  sample=kick_s_2.$EXT
+  seq_position=1
+  lorand=0.333
+  hirand=0.667
+<region>
+  region_label=kick soft RR3
+  sample=kick_s_3.$EXT
+  seq_position=1
+  lorand=0.667
+  hirand=1.000
+<region>
+  region_label=kick soft RR4
+  sample=kick_s_4.$EXT
+  seq_position=2
+  lorand=0.000
+  hirand=0.333
+<region>
+  region_label=kick soft RR5
+  sample=kick_s_5.$EXT
+  seq_position=2
+  lorand=0.333
+  hirand=0.667
+<region>
+  region_label=kick soft RR6
+  sample=kick_s_6.$EXT
+  seq_position=2
+  lorand=0.667
+  hirand=1.000
+
+<group>
+  group_label=kick hard
+  lovel=64
+  key=36
+  seq_length=2
+
+<region>
+  region_label=kick hard RR1
+  sample=kick_1.$EXT
+  seq_position=1
+  lorand=0.000
+  hirand=0.333
+<region>
+  region_label=kick hard RR2
+  sample=kick_2.$EXT
+  seq_position=1
+  lorand=0.333
+  hirand=0.667
+<region>
+  region_label=kick hard RR3
+  sample=kick_3.$EXT
+  seq_position=1
+  lorand=0.667
+  hirand=1.000
+<region>
+  region_label=kick hard RR4
+  sample=kick_4.$EXT
+  seq_position=2
+  lorand=0.000
+  hirand=0.333
+<region>
+  region_label=kick hard RR5
+  sample=kick_5.$EXT
+  seq_position=2
+  lorand=0.333 hirand=0.667
+<region>
+  region_label=kick hard RR6
+  sample=kick_6.$EXT
+  seq_position=2
+  lorand=0.667
+  hirand=1.000

@@ -1,0 +1,74 @@
+// ===========================================
+// Crash Cymbal
+<master>
+  master_label=crash
+  master_volume=-12
+  locc$VOLUME_CRASH=1
+  amplitude_oncc$VOLUME_CRASH=200
+  pan_oncc$PAN_CRASH=100
+  pan_curvecc$PAN_CRASH=1
+  tune_oncc$TUNE_CRASH=1200
+  tune_curvecc$TUNE_CRASH=1
+  note_polyphony=4
+  off_shape=-3
+  off_time=0.3
+  output=$OUTPUT_CRASH
+
+<group>
+  group_label=crash
+  group=10
+  off_by=11
+  key=49
+
+<region>
+  region_label=crash RR1
+  sample=crash_1.$EXT
+  lorand=0.0
+  hirand=0.125
+<region>
+  region_label=crash RR2
+  sample=crash_2.$EXT
+  seq_position=1
+  lorand=0.125
+  hirand=0.25
+<region>
+  region_label=crash RR3
+  sample=crash_3.$EXT
+  lorand=0.25
+  hirand=0.375
+<region>
+  region_label=crash RR4
+  sample=crash_4.$EXT
+  lorand=0.375
+  hirand=0.5
+<region>
+  region_label=crash RR5
+  sample=crash_5.$EXT
+  lorand=0.5
+  hirand=0.625
+<region>
+  region_label=crash RR6
+  sample=crash_6.$EXT
+  lorand=0.625
+  hirand=0.75
+<region>
+  region_label=crash RR7
+  sample=crash_7.$EXT
+  lorand=0.75
+  hirand=0.875
+<region>
+  region_label=crash RR8
+  sample=crash_8.$EXT
+  lorand=0.85
+  hirand=1.0
+
+
+<group>
+  group_label=crash mute
+  seq_length=1
+  group=11
+  key=59
+  ampeg_sustain=0
+
+<region>
+  sample=*silence

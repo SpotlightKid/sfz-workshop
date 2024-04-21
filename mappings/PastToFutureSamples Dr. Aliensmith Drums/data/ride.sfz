@@ -1,0 +1,73 @@
+// ===========================================
+// Ride Cymbal
+<master>
+  master_label=ride
+  master_volume=-12
+  locc$VOLUME_RIDE=1
+  amplitude_oncc$VOLUME_RIDE=200
+  pan_oncc$PAN_RIDE=100
+  pan_curvecc$PAN_RIDE=1
+  tune_oncc$TUNE_RIDE=1200
+  tune_curvecc$TUNE_RIDE=1
+  note_polyphony=4
+  off_shape=-3
+  off_time=0.5
+  output=$OUTPUT_RIDE
+
+<group>
+  group_label=ride rim
+  group=7
+  off_by=9
+  key=51
+
+<region>
+  region_label=ride RR1
+  sample=ride_1.$EXT
+  lorand=0.0
+  hirand=0.125
+<region>
+  region_label=ride RR2
+  sample=ride_2.$EXT
+  seq_position=1
+  lorand=0.125
+  hirand=0.25
+<region>
+  region_label=ride RR3
+  sample=ride_3.$EXT
+  lorand=0.25
+  hirand=0.375
+<region>
+  region_label=ride RR4
+  sample=ride_4.$EXT
+  lorand=0.375
+  hirand=0.5
+<region>
+  region_label=ride RR5
+  sample=ride_5.$EXT
+  lorand=0.5
+  hirand=0.625
+<region>
+  region_label=ride RR6
+  sample=ride_6.$EXT
+  lorand=0.625
+  hirand=0.75
+<region>
+  region_label=ride RR7
+  sample=ride_7.$EXT
+  lorand=0.75
+  hirand=0.875
+<region>
+  region_label=ride RR8
+  sample=ride_8.$EXT
+  lorand=0.85
+  hirand=1.0
+
+<group>
+  group_label=ride mute
+  seq_length=1
+  group=9
+  key=60
+  ampeg_sustain=0
+
+<region>
+  sample=*silence
