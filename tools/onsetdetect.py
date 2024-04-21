@@ -27,7 +27,7 @@ def detect_onsets(
     samplerate=0,
     channels=0,
 ):
-    """Detect pitches of given audio source.
+    """Detect onsets of given audio source.
 
     Supported methods: `energy`, `hfc`, `complex`, `phase`, `specdiff`, `kl`,
         `mkl`, `specflux`, `default`(`hfc`).
